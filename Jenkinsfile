@@ -15,7 +15,7 @@ pipeline {
 		VERSION_SHA = "sha${ GIT_COMMIT.substring(0,7).toUpperCase() }"
 		DISPLAY_VERSION = VersionNumber( versionNumberString: "-b${BUILD_NUMBER}${VERSION_SHA}" , versionPrefix: "${VERSION_PREFIX}", worstResultForIncrement: 'NOT_BUILT' )
 		PACKAGE_VERSION = VersionNumber( versionNumberString: "${BUILD_NUMBER}" , versionPrefix: "${VERSION_PREFIX}", worstResultForIncrement: 'NOT_BUILT' )
-		DATE_VERSION = VersionNumber( versionNumberString: "${BUILD_DATE_FORMATTED, XXXXXX}" , versionPrefix: "${VERSION_PREFIX}", worstResultForIncrement: 'NOT_BUILT' )
+		DATE_VERSION = VersionNumber( versionNumberString: "${BUILD_DATE_FORMATTED, 'yyyyMMddmmssSSS'}" , versionPrefix: "${VERSION_PREFIX}", worstResultForIncrement: 'NOT_BUILT' )
 	}
 
 	stages {
