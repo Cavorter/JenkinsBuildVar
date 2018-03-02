@@ -20,7 +20,8 @@ pipeline {
 	stages {
 		stage('Prepare') {
 			steps {
-                echo "Testing"
+                echo "Commit: ${GIT_COMMIT}"
+				echo "SHA Substring: ${VERSION_SHA}"
 				script {
 					currentBuild.displayName = "${DISPLAY_VERSION}"
 				}
