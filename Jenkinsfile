@@ -13,7 +13,7 @@ pipeline {
 		HOTFIX_VERSION = 0
 		VERSION_PREFIX = "${MAJOR_VERSION}.${MINOR_VERSION}.${HOTFIX_VERSION}"
 		VERSION_SHA = "sha${ GIT_COMMIT.substring(0,7).toUpperCase() }"
-		BUILD_NUMBER = ${env.VER_TRAAS}
+		BUILD_NUMBER = "${env.VER_TRAAS}"
 		DISPLAY_VERSION = VersionNumber( versionNumberString: "-b${BUILD_NUMBER}${VERSION_SHA}" , versionPrefix: "${VERSION_PREFIX}", worstResultForIncrement: 'NOT_BUILT' )
 		PACKAGE_VERSION = VersionNumber( versionNumberString: "${BUILD_NUMBER}" , versionPrefix: "${VERSION_PREFIX}", worstResultForIncrement: 'NOT_BUILT' )
 	}
