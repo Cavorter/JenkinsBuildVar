@@ -1,7 +1,7 @@
 pipeline {
 	agent {
 		node {
-			label ''
+			label 'windows'
 			customWorkspace "C:/work/${BRANCH_NAME}"
 		}
 	}
@@ -22,12 +22,18 @@ pipeline {
 		stage('Prepare') {
 			steps {
 				script {
-					env.VER_TRAAS = VER_TRAAS++
+					instance = Jenkins.getInstance()
+					globalNodeProperties = instance.getGlobalNodeProperties()
+					envVarsNodePropertyList = globalNodeProperties.getAll(hudson.slaves.EnvironmentVariablesNodeProperty.class)
+					envVars = null
+					envVars = envVarsNodePropertyList.get(0).getEnvVars()
+					envVars.put("VER_TRAAS", env.VER_TRAAS + 1 )
+					instance.save()
+
 					currentBuild.displayName = "${DISPLAY_VERSION}"
 				}
                 echo "Commit: ${GIT_COMMIT}"
 				echo "SHA Substring: ${VERSION_SHA}"
-				echo "Date Version: ${DATE_VERSION}"
 			}
 		}
 		stage('Build') {
@@ -46,6 +52,3 @@ pipeline {
 		}
 	}
 }
-180302090054636
-180302090108786
-180302090122490
